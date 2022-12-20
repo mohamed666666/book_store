@@ -3,6 +3,9 @@ from django.db import models
 from django.urls import reverse
 # Create your models here.
 
+
+
+
 class Category(models.Model):
     name =models.CharField(max_length=255,db_index=True)
     slug=models.SlugField(max_length=255,unique=True)
@@ -15,6 +18,11 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse("store:categories",args=[self.slug])
 
+
+
+class ProductManager(models.Manager):
+    def get_queryset(self):
+        return super(ProductManager,self).get_queryset().filter(isactive=True)
 
 class Product(models.Model):
     category = models.ForeignKey(Category,related_name='product',on_delete=models.CASCADE)
@@ -32,6 +40,8 @@ class Product(models.Model):
 
     created=models.TimeField(auto_now_add=True)
     updated=models.TimeField(auto_now=True)
+    objects=models.Manager()
+    products=ProductManager()
 
     class Meta:
         verbose_name_plural= 'Products'

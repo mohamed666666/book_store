@@ -19,5 +19,6 @@ from . import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("",include('store.urls'))
+    path("",include('store.urls')),
+    path("basket/",include('basket.urls', namespace='basket')),
 ]

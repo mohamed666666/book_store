@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "store"
+    "store",
+    "basket"
 ]
 
 MIDDLEWARE = [
@@ -63,7 +64,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "store.views.categories"
+                "store.views.categories",
+                "basket.contex_processor.basket"
             ],
         },
     },
@@ -119,5 +121,5 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-MEDIA_URL='/mdeia/'
-MEDIA_ROOT=os.path.join(BASE_DIR,'mdeia')
+MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+MEDIA_URL='/media/'
