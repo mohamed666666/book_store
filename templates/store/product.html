@@ -39,6 +39,7 @@
 
                             </div>
                             <div class="col-6 text-end">
+                                {% csrf_token %}
                                 <button type="button" id="add-button" value="{{product.id}}" class="btn btn-secondary btn-sm">Add to basket</button>
                             </div>
                         </div>
@@ -49,6 +50,8 @@
     </main>
 
 </div>
+
+{% block javascript %}
 <script>
     $(document).on('click', '#add-button', function (e) {
         e.preventDefault();
@@ -64,12 +67,12 @@
             },
             success: function (json) {
                document.getElementById("basket-qty").innerHTML = json.qty
-               console.log(json.qty)
+
             },
             error: function (xhr, errmsg, err) {}
         });
     })
 </script>
 
-
+{%endblock javascript%}
 {%endblock%}

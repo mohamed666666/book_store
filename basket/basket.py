@@ -12,8 +12,11 @@ class Basket():
     def add(self,product,qty):
         p_id=product.id
         if p_id not in self.basket:
-            self.basket[p_id]={"price":float(product.price),"quantaty":qty}
+            self.basket[p_id]={"price":float(product.price),"quantaty":int(qty)}
         self.sesion.modified=True
 
-
-
+    def __len__(self):
+        """
+        Get the basket data and count the quantaty of items
+        """
+        return sum(item['quantaty'] for item in self.basket.values())

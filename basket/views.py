@@ -7,13 +7,16 @@ from store.models import Product
 
 
 def basket_content(request ):
+
     return  render(request ,"basket/basket_content.html")
 
 
 
-def basket_add(request):
+def basketadd(request):
+
     basket = Basket(request)
-    print(request.POST.get('action'))
+
+
     if request.POST.get('action')=='post':
         p_id=int(request.POST.get("productid"))
         qty=int(request.POST.get("productqty"))
