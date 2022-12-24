@@ -9,4 +9,11 @@ class Basket():
         self.basket=basket
 
 
+    def add(self,product,qty):
+        p_id=product.id
+        if p_id not in self.basket:
+            self.basket[p_id]={"price":float(product.price),"quantaty":qty}
+        self.sesion.modified=True
+
+
 
