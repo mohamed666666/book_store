@@ -1,4 +1,6 @@
 
+from store.models import Product
+
 class Basket():
 
     def __init__(self,request):
@@ -14,6 +16,28 @@ class Basket():
         if p_id not in self.basket:
             self.basket[p_id]={"price":float(product.price),"quantaty":int(qty)}
         self.sesion.modified=True
+
+    def delete(self,pid):
+        if str(pid) in self.basket:
+
+            del self.basket[str(pid)]
+        self.sesion.modified = True
+
+
+
+
+
+
+    def get_products(self):
+        prods=[]
+        qts=[]
+        for i in self.basket:
+            prods.append(Product.objects.get(id=i))
+            qts.append(self.basket[i]["quantaty"])
+
+        return prods,qts
+
+
 
     def __len__(self):
         """
