@@ -23,6 +23,11 @@ class Basket():
             del self.basket[str(pid)]
         self.sesion.modified = True
 
+    def update(self,pid,qty):
+        for i in self.basket:
+            if str(pid).__eq__(i)  :
+                self.basket[i]["quantaty"]=qty
+            self.sesion.modified = True
 
 
 
@@ -31,11 +36,13 @@ class Basket():
     def get_products(self):
         prods=[]
         qts=[]
+        prices=0
         for i in self.basket:
             prods.append(Product.objects.get(id=i))
             qts.append(self.basket[i]["quantaty"])
+            prices+=self.basket[i]["price"]
 
-        return prods,qts
+        return prods,qts,prices
 
 
 
