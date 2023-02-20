@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "store",
-    "basket"
+    "basket",
+    "user"
 ]
 
 MIDDLEWARE = [
@@ -125,9 +126,27 @@ str(BASE_DIR.joinpath('static/')),
 ]
 
 
+
+# Stripe Payment
+# PUBLISHABLE_KEY = ''
+# SECRET_KEY = ''
+# STRIPE_ENDPOINT_SECRET = ''
+# stripe listen --forward-to localhost:8000/payment/webhook/
+
+# Custom user model
+AUTH_USER_MODEL = 'user.UserBase'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/user/login/'
+
+
+PASSWORD_RESET_TIMEOUT_DAYS=2
+# Email setting
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
 
 

@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 # Create your models here.
-
+from django.conf import settings
 
 
 
@@ -26,7 +26,7 @@ class ProductManager(models.Manager):
 
 class Product(models.Model):
     category = models.ForeignKey(Category,related_name='product',on_delete=models.CASCADE)
-    created_by=models.ForeignKey(User,related_name="product_creator",on_delete=models.CASCADE)
+    created_by=models.ForeignKey(settings.AUTH_USER_MODEL,related_name="product_creator",on_delete=models.CASCADE)
     title=models.CharField(max_length=255)
     auther=models.CharField(max_length=255)
     describtion=models.TextField(blank=True)
@@ -37,6 +37,8 @@ class Product(models.Model):
 
     instock=models.BooleanField(default=True)
     isactive=models.BooleanField(default=True)
+
+
 
     created=models.TimeField(auto_now_add=True)
     updated=models.TimeField(auto_now=True)
