@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-=v%tknxu2pk@$8rh9r9$gvotzaj49)2*p$$)rgorp1)*ex&q5n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [34.239.123.66]
 
 
 # Application definition
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "store",
     "basket",
-    "user"
+    "user",
+    "order"
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    
 ]
 
 ROOT_URLCONF = "bookstore.urls"
@@ -80,8 +82,13 @@ WSGI_APPLICATION = "bookstore.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+         "ENGINE": "django.db.backends.postgresql_psycopg2",
+        #"NAME": BASE_DIR / "db.sqlite3",
+        "NAME":"Store",
+        "USER":"postgres",
+        "PASSWORD":'183492765',
+        "HOST":"localhost",
+        "PORT":"5432"
     }
 }
 

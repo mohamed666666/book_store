@@ -28,7 +28,12 @@ class Basket():
             if str(pid).__eq__(i)  :
                 self.basket[i]["quantaty"]=qty
             self.sesion.modified = True
-
+    def get_total_paid(self):
+        total=0
+        for i in self.basket:
+            total+=self.basket[i]["price"]*self.basket[i]["quantaty"]
+        
+        return total
 
 
 
@@ -36,13 +41,13 @@ class Basket():
     def get_products(self):
         prods=[]
         qts=[]
-        prices=0
+        
         for i in self.basket:
             prods.append(Product.objects.get(id=i))
             qts.append(self.basket[i]["quantaty"])
-            prices+=self.basket[i]["price"]
+           
 
-        return prods,qts,prices
+        return prods,qts
 
 
 

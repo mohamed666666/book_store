@@ -8,10 +8,11 @@ from store.models import Product
 
 def basket_content(request ):
     basket = Basket(request)
-    prods,qs,  prices =basket.get_products()
+    prods,qs, =basket.get_products()
+    prices=basket.get_total_paid()
     out=zip(prods,qs)
 
-    context={"out":out,"total":prices+11.50,"subtotal":prices}
+    context={"out":out,"total":prices,"subtotal":prices}
 
 
 
@@ -22,7 +23,6 @@ def basket_content(request ):
 def basketadd(request):
 
     basket = Basket(request)
-
 
     if request.POST.get('action')=='post':
         p_id=int(request.POST.get("productid"))
@@ -41,7 +41,7 @@ def basketdelete(request):
         p_id = int(request.POST.get("productid"))
 
         basket.delete(p_id)
-        _,_,prices=basket.get_products()
+        prices=basket.get_total_paid()
         bas_count = basket.__len__()
         response = JsonResponse({"qty": bas_count,"subtotal":prices})
     return response
@@ -54,7 +54,7 @@ def basketdelete(request):
 
 def basket_update(request):
     basket = Basket(request)
-    prods, _ , prices = basket.get_products()
+    prices = basket.get_total_paid()
 
     if request.POST.get('action') == 'post':
         p_id = int(request.POST.get("productid"))
